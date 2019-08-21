@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { testNameToKey } from 'jest-snapshot/build/utils';
-import { homedir } from 'os';
+import MyChart from './MyChart';
 
 // import { Container } from './styles';
 
@@ -15,6 +14,15 @@ export default class Report extends Component {
   async componentDidMount() {
     this.sumFailure();
     this.sumSucceeded();
+  }
+
+  updateProps = () => {
+    this.setState({
+      props2:  {
+        
+     }
+    })
+    console.log(this.state.props2)
   }
 
   sumFailure = () => {
@@ -36,7 +44,13 @@ export default class Report extends Component {
     const report = this.props.data.map((entry, i) => (
       <div key={i} >
         <div>
-          <b>{entry.name}</b> Passou: {entry.success} - Falhou: {entry.failure}
+          <b>{entry.name}</b> 
+          <br/>Passou: {entry.success} - Falhou: {entry.failure}
+          <MyChart data={{
+            succeeded: entry.success,
+            failed: entry.failure,
+            title: entry.name
+          }}/>
         </div>
       </div>
     ))
@@ -51,11 +65,20 @@ export default class Report extends Component {
       </div>
     ))
 
+    const chartProps = {
+      succeeded: this.props.data.reduce(function (tot, arr) {
+        return tot + arr.success;
+      }, 0),
+      failed: this.props.data.reduce(function (tot, arr) {
+        return tot + arr.failure;
+      }, 0),
+      title: 'Geral' 
+    }
 
     return (
       <div>
         <h1>Relatório</h1>
-        <h2>Total</h2>
+        <MyChart data={chartProps} />
         <h3>Passou: {this.state.succeeded}</h3>
         <h3>Reprovou: {this.state.failed}</h3>
 

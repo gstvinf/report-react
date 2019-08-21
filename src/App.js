@@ -12,7 +12,6 @@ function App() {
     <div className="App">
       
       <header className="App-header">
-      <MyChart />
       < Report data={data} />
         <img src={logo} className="App-logo" alt="logo" />
         <p>
