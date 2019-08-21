@@ -3,15 +3,17 @@ import logo from './logo.svg';
 import './App.css';
 
 // import data from '../../central_de_configuracoes_automacao/junitReportFile.json';
-import data from  './data.json'
+import data from './data.json'
 import Report from './Report';
+import MyChart from './MyChart';
 
 function App() {
   return (
     <div className="App">
-
-    < Report data={data} />
+      
       <header className="App-header">
+      <MyChart />
+      < Report data={data} />
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.

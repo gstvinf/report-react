@@ -46,8 +46,6 @@ export default class Report extends Component {
         <h3>{entry.name}</h3>
         <h4>Passou: {entry.success}</h4>
         <h4>Falhou: {entry.failure}</h4>
-
-
         {entry.testCase.map(test => <div>{test.name} - {test.status.toString()}</div>)}
 
       </div>
