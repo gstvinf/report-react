@@ -1,6 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Collapsible from 'react-collapsible';
+
 
 // import data from '../../central_de_configuracoes_automacao/junitReportFile.json';
 import data from './data.json'
@@ -9,9 +11,14 @@ import MyChart from './MyChart';
 
 function App() {
   return (
-    <div className="App">
-      
-      <header className="App-header">
+    <div>
+      <Collapsible trigger="TESTE">
+        <p>This is the collapsible content. It can be any element or React component you like.</p>
+        <p>It can even be another Collapsible component. Check out the next section!</p>
+      </Collapsible>
+
+      <div  className="">
+      <header className="">
       < Report data={data} />
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -26,6 +33,9 @@ function App() {
           Learn React
         </a>
       </header>
+      </div>
+      
+
     </div>
   );
 }

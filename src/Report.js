@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import MyChart from './MyChart';
+import Collapsible from 'react-collapsible';
+
 
 // import { Container } from './styles';
 
@@ -44,24 +46,25 @@ export default class Report extends Component {
     const report = this.props.data.map((entry, i) => (
       <div key={i} >
         <div>
-          <b>{entry.name}</b> 
+          <Collapsible trigger={entry.name}> 
           <br/>Passou: {entry.success} - Falhou: {entry.failure}
           <MyChart data={{
             succeeded: entry.success,
             failed: entry.failure,
             title: entry.name
           }}/>
+          </Collapsible>
         </div>
       </div>
     ))
 
     const allReport = this.props.data.map((entry, i) => (
-      <div key={i} >
-        <h3>{entry.name}</h3>
-        <h4>Passou: {entry.success}</h4>
-        <h4>Falhou: {entry.failure}</h4>
-        {entry.testCase.map(test => <div>{test.name} - {test.status.toString()}</div>)}
-
+      <div key={i} >  
+        <Collapsible trigger={entry.name}>
+          <h4>Passou: {entry.success}</h4>
+          <h4>Falhou: {entry.failure}</h4>
+          {entry.testCase.map(test => <div>{test.name} - {test.status.toString()}</div>)}
+        </Collapsible>
       </div>
     ))
 
@@ -77,13 +80,17 @@ export default class Report extends Component {
 
     return (
       <div>
+
         <h1>Relatório</h1>
         <MyChart data={chartProps} />
         <h3>Passou: {this.state.succeeded}</h3>
         <h3>Reprovou: {this.state.failed}</h3>
 
-        {report}
-        {allReport}
+        <b>Reports</b>
+        <p>{report}</p>
+
+        <b>Test list</b>
+        <p>{allReport}</p>
       </div>
     );
   }
